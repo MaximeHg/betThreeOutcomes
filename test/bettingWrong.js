@@ -42,8 +42,8 @@ contract('BetThreeOutcomes', function(accounts) {
       let ballot = await BetThreeOutcomesInstance.ballot.call();
       BallotThreeOutcomesInstance = BallotThreeOutcomes.at(ballot);
       await BallotThreeOutcomesInstance.voteResult.sendTransaction(1, {from: accounts[1], value: "50000000000000000"});
-      let phiVotes = await BallotThreeOutcomesInstance.homeWon.call();
-      assert.equal(phiVotes, 1, "not enough philadelphia wins votes");
+      let homeVotes = await BallotThreeOutcomesInstance.homeWon.call();
+      assert.equal(homeVotes, 1, "not enough philadelphia wins votes");
     });
 
     it("multiple votes : consensus not reached", async() => {
@@ -52,8 +52,8 @@ contract('BetThreeOutcomes', function(accounts) {
       await BallotThreeOutcomesInstance.voteResult.sendTransaction(2, {from: accounts[3], value: "50000000000000000"});
       await BallotThreeOutcomesInstance.voteResult.sendTransaction(2, {from: accounts[4], value: "50000000000000000"});
       await BallotThreeOutcomesInstance.voteResult.sendTransaction(1, {from: accounts[5], value: "50000000000000000"});
-      let phiVotes = await BallotThreeOutcomesInstance.homeWon.call();
-      assert.equal(phiVotes, 4, "not enough philadelphia wins votes");
+      let homeVotes = await BallotThreeOutcomesInstance.homeWon.call();
+      assert.equal(homeVotes, 4, "not enough philadelphia wins votes");
       let totalVotes = await BallotThreeOutcomesInstance.totalVoters.call();
       assert.equal(totalVotes, 6, "not enough votes");
     });
@@ -82,8 +82,8 @@ contract('BetThreeOutcomes', function(accounts) {
       await BallotThreeOutcomesInstance.voteResult.sendTransaction(1, {from: accounts[7], value: "50000000000000000"});
       await BallotThreeOutcomesInstance.voteResult.sendTransaction(2, {from: accounts[4], value: "50000000000000000"});
       await BallotThreeOutcomesInstance.voteResult.sendTransaction(1, {from: accounts[5], value: "50000000000000000"});
-      let phiVotes = await BallotThreeOutcomesInstance.homeWon.call();
-      assert.equal(phiVotes, 6, "not enough philadelphia wins votes");
+      let homeVotes = await BallotThreeOutcomesInstance.homeWon.call();
+      assert.equal(homeVotes, 6, "not enough philadelphia wins votes");
       let totalVotes = await BallotThreeOutcomesInstance.totalVoters.call();
       assert.equal(totalVotes, 7, "not enough votes");
     });
